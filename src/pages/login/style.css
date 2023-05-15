@@ -1,0 +1,31 @@
+.login-wrapper {
+  background-image: linear-gradient(to bottom, var(--s2), var(--s1));
+  position: relative;
+}
+
+.login-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.login-glow::before {
+  position: absolute;
+
+  content: "";
+
+  width: 100%;
+  height: 25%;
+
+  transform: rotate(35deg) translate(0px, -200%);
+
+  opacity: 0.1;
+  filter: blur(100px);
+
+  background: linear-gradient(to right, aquamarine, crimson);
+}
