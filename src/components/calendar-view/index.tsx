@@ -109,17 +109,6 @@ export function CalendarMonthView({
         return children(
           generateCalendarDateContext(slotDate, i, currentMonth, columns)
         );
-
-        return (
-          <div className="w-full h-full max-h-full">
-            {children(
-              generateCalendarDateContext(slotDate, i, currentMonth, columns)
-            )}
-            {/* {children(
-              generateCalendarDateContext(slotDate, i, currentMonth, columns)
-            )} */}
-          </div>
-        );
       })}
     </div>
   );

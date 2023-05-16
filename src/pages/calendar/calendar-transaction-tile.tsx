@@ -86,10 +86,9 @@ export function CalendarTransationTile({
           {(transform) => {
             return (
               <div
+                data-transform={JSON.stringify(transform)}
+                id={dragItem.id}
                 style={{
-                  transform: transform
-                    ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
-                    : undefined,
                   background: deleteMode
                     ? getCssVariableValue("--danger")
                     : getColorFromTransactionType(

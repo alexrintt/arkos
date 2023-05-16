@@ -260,17 +260,67 @@ function CalendarPage(props: ICalendarPage) {
                 const dragTarget = e.active.data
                   .current as unknown as DragItemTarget<Transaction, number>;
 
-                const el = document.getElementById(dragTarget.container.id);
+                const el = document.getElementById(dragTarget.id);
 
-                el!.style.zIndex = "10000";
+                if (!el) return;
+
+                const currentPos = el!.getBoundingClientRect();
+
+                const origin = {
+                  top: currentPos.top,
+                  left: currentPos.left,
+                };
+
+                el.setAttribute("data-origin", JSON.stringify(origin));
+
+                const overlay = el.cloneNode(true) as HTMLDivElement;
+                el.appendChild(overlay);
+                overlay.setAttribute("id", el.getAttribute("id") + "__overlay");
+
+                overlay.style.position = "fixed";
+                overlay.style.opacity = "0.5";
+                overlay.style.top = origin.top + "px";
+                overlay.style.left = origin.left + "px";
+                overlay.style.width = currentPos.width + "px";
+                overlay.style.height = currentPos.height + "px";
+                overlay.style.zIndex = "10000";
+              }}
+              onDragMove={(e) => {
+                const dragTarget = e.active.data
+                  .current as unknown as DragItemTarget<Transaction, number>;
+
+                const el = document.getElementById(dragTarget.id);
+
+                const overlay = document.getElementById(
+                  dragTarget.id + "__overlay"
+                );
+
+                if (!overlay || !el) return;
+
+                const transform = JSON.parse(
+                  el.getAttribute("data-transform")!
+                );
+
+                const origin = JSON.parse(el.getAttribute("data-origin")!);
+
+                overlay.style.top =
+                  (((origin.top as number) + transform.y) as number) + "px";
+                overlay.style.left =
+                  (((origin.left as number) + transform.x) as number) + "px";
               }}
               onDragEnd={(e) => {
                 function setDragTargetIndexToDefault() {
                   const dragTarget = e.active.data
                     .current as unknown as DragItemTarget<Transaction, number>;
 
-                  const el = document.getElementById(dragTarget.container.id);
-                  el!.style.zIndex = "0";
+                  const el = document.getElementById(dragTarget.id);
+                  const overlay = document.getElementById(
+                    dragTarget.id + "__overlay"
+                  );
+
+                  if (!el || !overlay) return;
+
+                  el.removeChild(overlay);
                 }
                 function updateDragTargetStateIfApplicable() {
                   const dragTarget = e.active.data

@@ -204,7 +204,7 @@ export function Layout({ children }: React.PropsWithChildren) {
           </div>
         </div>
       </aside>
-      <main className="flex-1 ml-[13rem] border-l border-s3 w-full h-full">
+      <main className="flex-1 ml-[13rem] border-l border-s3 w-full h-full overflow-hidden">
         {children}
       </main>
     </div>

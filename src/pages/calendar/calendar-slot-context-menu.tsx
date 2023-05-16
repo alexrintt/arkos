@@ -77,101 +77,103 @@ export function CalendarSlotContextMenu({ context }: ICalendarSlotContainer) {
   };
 
   return (
-    <div
-      onContextMenu={() => console.log("what")}
-      id={dropContainer.id}
-      className={classNames(
-        {
-          "bg-s1": isPast,
-          "bg-s2": isFuture,
-        },
-        "w-full h-full relative"
-      )}
-      style={{
-        userSelect: "none",
-      }}
-    >
-      <ContextMenuTrigger id={contextMenuId}>
-        <CalendarDroppableTransactionSlot
-          dropContainer={dropContainer}
-          context={context}
-          onClick={openTransactionModal}
-        />
-      </ContextMenuTrigger>
-      <ContextMenu
-        id={contextMenuId}
-        onHide={() => dispatch(uiAction.closeContextMenu())}
-        onShow={() => dispatch(uiAction.openContextMenu())}
-        appendTo="#context-menu-root"
+    <div className="w-full h-full max-h-full overflow-hidden">
+      <div
+        onContextMenu={() => console.log("what")}
+        id={dropContainer.id}
+        className={classNames(
+          {
+            "bg-s1": isPast,
+            "bg-s2": isFuture,
+          },
+          "w-full h-full relative"
+        )}
+        style={{
+          userSelect: "none",
+        }}
       >
-        <div className="bg-s0 rounded shadow-lg">
-          <div className="p-1">
-            <ContextMenuItem>
-              <ListTile
-                onClick={() =>
-                  openTransactionModal({ type: TransactionType.income })
-                }
-                leading={<ArrowUpIcon fill="var(--success)" size={14} />}
-                text="New income"
-              />
-            </ContextMenuItem>
-            <ContextMenuItem>
-              <ListTile
-                onClick={() =>
-                  openTransactionModal({ type: TransactionType.outcome })
-                }
-                leading={<ArrowDownIcon fill="var(--danger)" size={14} />}
-                text="New outcome"
-              />
-            </ContextMenuItem>
-            <ContextMenuItem>
-              <ListTile
-                onClick={() =>
-                  openTransactionModal({ type: TransactionType.swap })
-                }
-                leading={<ArrowSwitchIcon fill="var(--w1)" size={14} />}
-                text="New swap"
-              />
-            </ContextMenuItem>
+        <ContextMenuTrigger id={contextMenuId}>
+          <CalendarDroppableTransactionSlot
+            dropContainer={dropContainer}
+            context={context}
+            onClick={openTransactionModal}
+          />
+        </ContextMenuTrigger>
+        <ContextMenu
+          id={contextMenuId}
+          onHide={() => dispatch(uiAction.closeContextMenu())}
+          onShow={() => dispatch(uiAction.openContextMenu())}
+          appendTo="#context-menu-root"
+        >
+          <div className="bg-s0 rounded shadow-lg">
+            <div className="p-1">
+              <ContextMenuItem>
+                <ListTile
+                  onClick={() =>
+                    openTransactionModal({ type: TransactionType.income })
+                  }
+                  leading={<ArrowUpIcon fill="var(--success)" size={14} />}
+                  text="New income"
+                />
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <ListTile
+                  onClick={() =>
+                    openTransactionModal({ type: TransactionType.outcome })
+                  }
+                  leading={<ArrowDownIcon fill="var(--danger)" size={14} />}
+                  text="New outcome"
+                />
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <ListTile
+                  onClick={() =>
+                    openTransactionModal({ type: TransactionType.swap })
+                  }
+                  leading={<ArrowSwitchIcon fill="var(--w1)" size={14} />}
+                  text="New swap"
+                />
+              </ContextMenuItem>
+            </div>
+            <Divider color="var(--s1)" />
+            <div className="p-1">
+              <ContextMenuItem>
+                <ListTile
+                  leading={<ProjectTemplateIcon fill="var(--t1)" size={14} />}
+                  text="Create from template"
+                />
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <ListTile
+                  leading={<DownloadIcon fill="var(--t1)" size={14} />}
+                  text="Import from file"
+                />
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <ListTile
+                  leading={<CloudIcon fill="var(--t1)" size={14} />}
+                  text="Import from cloud"
+                />
+              </ContextMenuItem>
+            </div>
+            <Divider color="var(--s1)" />
+            <div className="p-1">
+              <ContextMenuItem>
+                <ListTile
+                  leading={<CreditCardIcon fill="var(--t1)" size={14} />}
+                  text="Create wallet"
+                />
+              </ContextMenuItem>
+              <ContextMenuItem>
+                <ListTile
+                  leading={<RocketIcon fill="var(--t1)" size={14} />}
+                  text="Create goal"
+                />
+              </ContextMenuItem>
+            </div>
           </div>
-          <Divider color="var(--s1)" />
-          <div className="p-1">
-            <ContextMenuItem>
-              <ListTile
-                leading={<ProjectTemplateIcon fill="var(--t1)" size={14} />}
-                text="Create from template"
-              />
-            </ContextMenuItem>
-            <ContextMenuItem>
-              <ListTile
-                leading={<DownloadIcon fill="var(--t1)" size={14} />}
-                text="Import from file"
-              />
-            </ContextMenuItem>
-            <ContextMenuItem>
-              <ListTile
-                leading={<CloudIcon fill="var(--t1)" size={14} />}
-                text="Import from cloud"
-              />
-            </ContextMenuItem>
-          </div>
-          <Divider color="var(--s1)" />
-          <div className="p-1">
-            <ContextMenuItem>
-              <ListTile
-                leading={<CreditCardIcon fill="var(--t1)" size={14} />}
-                text="Create wallet"
-              />
-            </ContextMenuItem>
-            <ContextMenuItem>
-              <ListTile
-                leading={<RocketIcon fill="var(--t1)" size={14} />}
-                text="Create goal"
-              />
-            </ContextMenuItem>
-          </div>
-        </div>
-      </ContextMenu>
+        </ContextMenu>
+      </div>
     </div>
   );
 }
