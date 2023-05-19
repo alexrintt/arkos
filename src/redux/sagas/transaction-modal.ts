@@ -77,10 +77,6 @@ export function* saveTransactionModal() {
 
       const isEditing = isDefined(transactionModal.current.id);
 
-      console.log({
-        "state.transactionModal": transactionModal.current,
-      });
-
       if (isEditing) {
         if (transactionModalHasChangesLeft) {
           yield put<TransactionAction<Partial<Transaction>>>({

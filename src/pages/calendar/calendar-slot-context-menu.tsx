@@ -41,13 +41,7 @@ export function CalendarSlotContextMenu({ context }: ICalendarSlotContainer) {
 
   const dispatch = useDispatch();
 
-  // const isContextMenuOpen = useSelector(selectIsContextMenuOpen());
-
   function openTransactionModal(transaction?: Partial<Transaction>) {
-    // if (isContextMenuOpen) {
-    //   console.log({ isContextMenuOpen });
-    // }
-
     if (isDefined(transaction)) {
       dispatch<TransactionModalAction<Partial<Transaction>>>({
         type: TransactionModalActionType.openExistingTransaction,
@@ -79,7 +73,7 @@ export function CalendarSlotContextMenu({ context }: ICalendarSlotContainer) {
   return (
     <div className="w-full h-full max-h-full overflow-hidden">
       <div
-        onContextMenu={() => console.log("what")}
+        onContextMenu={() => {}}
         id={dropContainer.id}
         className={classNames(
           {
