@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createHashRouter, RouterProvider } from "react-router-dom"; // 1. Import Hash Router
+import { createHashRouter, RouterProvider, Navigate } from "react-router-dom"; // 1. Import Hash Router
 import App from "./App";
 import LoginPage from "./pages/login";
 // import DashboardPage from "./pages/dashboard";
@@ -30,6 +30,10 @@ const router = createHashRouter([
   // },
   ...Calendar.routes,
   ...Icon.routes,
+  {
+    path: "/",
+    element: <Navigate to="/c/t" />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
